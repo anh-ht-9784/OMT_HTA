@@ -17,5 +17,5 @@ Route::get('/', function () {
     return view('frontend/index');
 });
 Route::get('/admin', function () {
-    return view('layoutAdmin');
+    return view('backend/index');
 });

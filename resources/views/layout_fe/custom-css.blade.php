@@ -1,4 +1,5 @@
-/* header */
+<style>
+    /* header */
 
 header {
     background-color: black !important;
@@ -61,7 +62,7 @@ nav a {
 
 footer,
 .list-group-item {
-    background-color: gray !important;
+    background-color: black !important;
     color: white;
 }
 
@@ -76,7 +77,7 @@ footer,
 
 .footer-tt {
     border-top: 1px solid white;
-    background-color: gray;
+    background-color: black;
     color: white;
     height: 50px;
 }
@@ -91,3 +92,4 @@ body,
 article {
     background-color: #F0F0F0;
 }
+</style>
