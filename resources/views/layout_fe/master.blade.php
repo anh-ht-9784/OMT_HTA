@@ -18,9 +18,10 @@
 
 </head>
 @include('layout_fe.custom-css')
+@yield('css')
 <body style="background-color: #F0F0F0;">
     <header>
-        @include('layout_fe.header')
+        @yield('header')
       
     </header>
     <div class="image-banner container" >
@@ -58,6 +59,8 @@
     </div>
 
 
+    @include('layout_fe.custom-js')
+    @yield('js')
 </body>
 
 </html>

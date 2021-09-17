@@ -1,3 +1,4 @@
+
 <div class="row" style="padding: 0 10rem 0 10rem;">
     <div class="col-md-2" >
         <img  src="image/logo/gamek.png" height="100rem">

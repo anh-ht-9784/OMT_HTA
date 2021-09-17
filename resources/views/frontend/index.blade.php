@@ -1,31 +1,42 @@
 @extends('layout_fe.master')
+
 @section('title')
 Trang Chủ
 @endsection
-@section('content')
-<style>
-    .card {
-        border: none !important;
-        padding: 50px 10px 0px;
-        background-color: #F0F0F0;
-        text-align: center;
-        margin: 0 auto;
-    }
 
-    .qc-right {
-        padding-top: 50px ;
-        
-    }
-    .news-top{
-        margin-top:2rem;
-        background-color: gray ;
-        color: white; 
-        height: 50px;
-    }
-    .news-top>p{    
-        line-height:50px;
-    }
+@section('header')
+@include('layout_fe.header')
+@endsection
+
+@section('css')
+<style>
+  .card {
+      border: none !important;
+      padding: 50px 10px 0px;
+      background-color: #F0F0F0;
+      text-align: center;
+      margin: 0 auto;
+  }
+
+  .qc-right {
+      padding-top: 50px ;
+      
+  }
+  .news-top{
+      margin-top:2rem;
+      background-color: gray ;
+      color: white; 
+      height: 50px;
+  }
+  .news-top>p{    
+      line-height:50px;
+  }
 </style>
+@endsection
+
+
+@section('content')
+
 
 <div class="row">
     <div class="col-8">
@@ -136,4 +147,7 @@ Trang Chủ
       </div>
 </div>
 
+@endsection
+
+@section('js')
 @endsection
