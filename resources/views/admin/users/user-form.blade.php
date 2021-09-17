@@ -42,7 +42,7 @@
                                 <label>Address</label>
                                 <input class="mt-3 form-control" type="text" name="address" id="address" />
                             </div>
-                            <div class="mt-3">
+                            <div class="mt-3" id="hiden_password">
                                 <label>Password</label>
                                 <input class="mt-3 form-control" type="text" name="password" id="password" />
                             </div>

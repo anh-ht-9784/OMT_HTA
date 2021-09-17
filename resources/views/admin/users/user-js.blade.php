@@ -1,10 +1,15 @@
 <script>
     function myFunction() {
+        // hiện modal
         var modal = document.getElementsByClassName("test-modal");
         modal[0].id = "modal_create"
         var title_modal = document.getElementsByClassName("title-user-form");
         title_modal[0].innerHTML = "Thêm Thông Tin Người Dùng";
+        // đổi id button
         $(".btn-form-create")[0].id = "btn-form-create";
+        // hiên input pass
+        var hiden_password = document.getElementById('hiden_password');
+        hiden_password.style.display = "block";
         // clear form
         document.getElementById('image_old').src="";
         var input = $("#form_create input");
@@ -51,15 +56,18 @@
     }
 
     function myFunction2(id) {
-
+        //hiện modal
         var modal = document.getElementsByClassName("test-modal");
         modal[0].id = "modal_edit"
         var title_modal = document.getElementsByClassName("title-user-form");
         title_modal[0].innerHTML = "Cập Nhật Thông Tin Người Dùng";
+        // đổi id button
         $(".btn-form-create")[0].id = "btn-form-upload"
-
-        var url = "http://omt.test:8080/admin/users/edit/" + id;
+        //ẩn input password
+        var hiden_password = document.getElementById('hiden_password');
+        hiden_password.style.display = "none";
         // hiển thị chỉnh sửa.
+        var url = "http://omt.test:8080/admin/users/edit/" + id;
         $.ajax({
             type: "get",
             url: url,
@@ -123,7 +131,7 @@
                 }
             });
 
-            //
+            
         });
     }
 </script>
