@@ -27,6 +27,7 @@ Route::group([
     Route::group([
         'prefix' => 'users',
         'as' => 'users.',
+        
        
     ], function () {
         Route::get('/', 'App\Http\Controllers\admin\UserController@index')->name('index');

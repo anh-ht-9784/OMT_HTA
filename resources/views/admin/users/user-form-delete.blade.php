@@ -1,6 +1,5 @@
 
-<button class="btn btn-primary" data-toggle="modal"
-data-target="#confim_delete{{ $c->id }}">Delete</button>
+
 <div class="modal fade" id="confim_delete{{ $c->id }}" tabindex="-1" role="dialog">
 <div class="modal-dialog" role="document">
     <div class="modal-content">

@@ -2,74 +2,61 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\User\StoreUser;
+use App\Http\Requests\User\UpdateUser;
+use App\Repositories\users\userrepository;
+
 class UserController extends Controller
 {
+    public $userrepository;
+
+    public function __construct(userrepository $userrepository)
+    {
+        $this->userrepository = $userrepository;
+    }
+
+
     public function index()
-    {   
-            $list = User::all();
-  
+    {
+        $list = $this->userrepository->index();
         return view('admin/users/index', ['data' => $list]);
     }
-    public function store(Request $request )
-    {
-        $data = request()->except("_token");
-        
-        if (empty($data['avatar']) == false) {
-            $image = request()->file('avatar');
-            $image_name = $image->getClientOriginalName();
-            request()->file('avatar')->move(public_path('image/product'), $image_name);
-            $data['avatar'] = $image_name;
-        } else {
-            $data['avatar'] ="nen_thom_01.jpg";
-        }
-       
-      
-            $result = User::Create($data);
 
-            return response()->json([
-                'status' => '200',
-                'message' =>'ok',
-    
-            ]);
+
+    public function store(StoreUser $request)
+    {    
+        $data = request()->except("_token");
+        $result = $this->userrepository->store($data);
+        return response()->json([
+            'status' => '200',
+            'message' => 'ok',
+        ]);
     }
-    public function edit($id )
+    public function edit($id)
     {
-        $data = User::find($id);
+        $data = $this->userrepository->edit($id);
         return response()->json([
             'data' => $data,
         ]);
     }
 
 
-    public function update($id)
-    { 
- 
-        $user = User::find($id);
+    public function update($id, UpdateUser $request)
+    {
         $data = request()->except("_token");
-
-        if (empty($data['avatar']) == false) {
-            $image = request()->file('avatar');
-            $image_name = $image->getClientOriginalName();
-            request()->file('avatar')->move(public_path('image/product'), $image_name);
-            $data['avatar'] = $image_name;
-        } else {
-            $data['avatar'] =$data['avatar_old'];
-        }
-        $user->update($data);
+        $this->userrepository->update($id,$data);
         return response()->json([
             'status' => '200',
-            'message' =>'ok',
-
+            'message' => 'ok',
         ]);
     }
 
     public function delete($id)
     {
-        $user = User::find($id);
-        $user->delete($id);
+        $this->userrepository->delete($id);
         return redirect()->route('admin.users.index');
     }
 }
