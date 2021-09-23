@@ -60,7 +60,7 @@
                     <div class="mt-3">
                         <label>Gender</label>
                         <select class="mt-3 form-control" name="gender" id="gender">
-                            <option value="1">
+                            <option  value="1">
                                 Male
                             </option>
                             <option value="2">

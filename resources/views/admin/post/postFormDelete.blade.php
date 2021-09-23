@@ -1,7 +1,7 @@
-
+{{-- 
   <button class="btn btn-danger" data-toggle="modal"
-  data-target="#confim_delete{{ $c->id }}">@lang('user.delete')</button>
-<div class="modal fade" id="confim_delete{{ $c->id }}" tabindex="-1" role="dialog">
+  data-target="#confim_post_delete{{ $c->id }}">@lang('user.delete')</button>
+<div class="modal fade" id="confim_post_delete{{ $c->id }}" tabindex="-1" role="dialog">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -16,7 +16,7 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary"
                 data-dismiss="modal">Close</button>
-            <form action="{{ route('admin.users.delete', ['id' => $c->id]) }}"
+            <form action="{{ route('admin.post.delete', ['id' => $c->id]) }}"
                 method="post">
                 @csrf
                 <button type="submit" class="btn btn-primary">Xóa</button>
@@ -25,4 +25,4 @@
         </div>
     </div>
 </div>
-</div>
+</div> --}}

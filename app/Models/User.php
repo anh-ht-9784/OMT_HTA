@@ -48,4 +48,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function postRelation(){
+        return $this->hasMany(Posts::class, 'userid_create' , 'id');
+    }
+    public function commentsRelation(){
+        return $this->belongsTo(Comment::class, 'user_id' , 'id');
+    }
+    // public function setPasswordAttribute($value){
+    //     // tên function bắt buộc phai đặt đung
+    //     $hased =bcrypt($value) ;
+    //    return $value = $this->attributes['password'] = $hased ;
+          
+    // }
 }

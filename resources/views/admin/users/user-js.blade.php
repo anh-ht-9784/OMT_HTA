@@ -10,7 +10,7 @@
         
         $("#btn-form-create").on('click', function(event) {
             event.preventDefault();
-
+    console.log($("#modal_create input[name='password']").val())
             console.log($("#modal_create input[name='avatar']")[0].files[0]);
             dataform = new FormData();
             dataform.append('avatar', $("#modal_create input[name='avatar']")[0].files[0]);
@@ -32,7 +32,11 @@
                 processData: false,
                 dataType: "json",
                 success: function(data) {
-                    window.location.reload();
+                    if(data.status == 200){
+                        alert(data.message);
+                        window.location.reload();
+                    }
+                   
                     
                 },
                 error: function(data) {
@@ -48,15 +52,17 @@
             });
         });
     }
-    function myFunction2(id) {
+    function userEdit(iduser) {
         var title_modal = document.getElementsByClassName("title-user-form");
         title_modal[1].innerHTML = "Cập Nhật Thông Tin Người Dùng";
         // đổi id button
         $(".btn-form-create")[1].id = "btn-form-upload"
         $("#modal_edit #hiden_password").hide();
 
+       
 
-        var url = "http://omt.test:8080/admin/users/edit/" + id;
+
+        var url = "http://omt.test:8080/admin/users/edit/" + iduser;
         $.ajax({
             type: "get",
             url: url,
@@ -111,13 +117,19 @@
                 dataType: 'json',
                 timeout: 100000,
                 success: function(data) {
-                    window.location.reload();
+                    if(data.status == 200){
+                        alert(data.message);
+                        window.location.reload();
+                       
+                    }
                 },
                 error: function(data) {
-                    var errors = data.responseJSON;
+                    var errors = data.responseJSON; 
+                  
                     if($.isEmptyObject(errors) == false) {
                         $.each(errors.errors,function (key, value) {
                             var ErrorID = '#modal_edit #' + key +'Error';
+                            $(span).text("");
                             $(ErrorID).text(value);
                         //    console.log(key,value);
                         })

@@ -16,7 +16,10 @@ class UserRepository implements UserRepositoryInterface
   public function index()
   {
     return User::all();
+
   }
+
+
   public function store(array $data)
   {
 
@@ -30,12 +33,17 @@ class UserRepository implements UserRepositoryInterface
     }
 
     return  User::Create($data);
+
+
   }
+  
   public function edit($id)
   {
     return User::find($id);
   }
-  public function update($id, $data)
+
+
+  public function update($user, $data)
   {
     if (empty($data['avatar']) == false) {
       $image = request()->file('avatar');
@@ -45,7 +53,7 @@ class UserRepository implements UserRepositoryInterface
     } else {
       $data['avatar'] = $data['avatar_old'];
     }
-    return  User::find($id)->update($data);
+    return  $user->update($data);
   }
   public function delete($id)
   {

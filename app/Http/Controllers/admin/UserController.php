@@ -9,7 +9,7 @@ use App\Http\Requests\User\StoreUser;
 use App\Http\Requests\User\UpdateUser;
 use App\Repositories\users\userrepository;
 
-class UserController extends Controller
+class UserController extends Controller 
 {
     public $userrepository;
 
@@ -27,12 +27,12 @@ class UserController extends Controller
 
 
     public function store(StoreUser $request)
-    {    
+    {
         $data = request()->except("_token");
         $result = $this->userrepository->store($data);
         return response()->json([
             'status' => '200',
-            'message' => 'ok',
+            'message' => 'Thêm mới thành công',
         ]);
     }
     public function edit($id)
@@ -46,12 +46,20 @@ class UserController extends Controller
 
     public function update($id, UpdateUser $request)
     {
-        $data = request()->except("_token");
-        $this->userrepository->update($id,$data);
-        return response()->json([
-            'status' => '200',
-            'message' => 'ok',
-        ]);
+        $user = $this->userrepository->edit($id);
+        if (empty($user) == true) {
+            return response()->json([
+                'status' => '100',
+                'message' => "Không có bản ghi nào tương ứng",
+            ]);
+        } else {
+            $data = request()->except("_token");
+            $this->userrepository->update($user, $data);
+            return response()->json([
+                'status' => '200',
+                'message' => 'Cập nhật thành công',
+            ]);
+        }
     }
 
     public function delete($id)

@@ -56,11 +56,10 @@
                         {{ $c->gender == 1 ? 'nam' : 'nữ' }}
                     </td>
                     <td>
-                        <button class="btn-modal-edit btn btn-primary" onclick="myFunction2({{ $c->id }})"
+                        <button class="btn-modal-edit btn btn-primary" onclick="myFunction()" onclick="userEdit({{ $c->iduser }})"
                             role="button" data-id="{{ $c->id }}" data-toggle="modal"
-                            data-target="#modal_edit">@lang('user.edit_user')</button>
-                        <button class="btn btn-danger" data-toggle="modal"
-                            data-target="#confim_delete{{ $c->id }}">@lang('user.delete_user')</button>
+                            data-target="#modal_edit">@lang('user.edit')</button>
+                            @include('admin.users.user-form-delete')
 
                     </td>
                 </tr>
@@ -69,7 +68,7 @@
             @endforeach
         </tbody>
     </table>
-    @include('admin.users.user-form-delete')
+
     {{-- creatr --}}
     <div class="test-modal modal fade" name="testmodal" id="modal_edit" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -77,8 +76,11 @@
         </div>
     </div>
     {{--  --}}
-    @include('admin.users.user-js')
+   
 
 
 
 @endsection
+@push('script')
+@include('admin.users.user-js')
+@endpush
