@@ -9,6 +9,7 @@
             <div class="modal-body">
                 <form method="POST" id="form_create" action="" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id_user" id="id_user" >
                     <div class="mt-3">
                         <label>username</label>
                         <input class="mt-3 form-control" type="text" name="username" id="username" />

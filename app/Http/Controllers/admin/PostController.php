@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\storePost;
 use App\Http\Requests\Post\updatePost;
+use App\Models\User;
 use App\Repositories\post\PostRepository;
 
 class PostController extends Controller
@@ -24,20 +25,20 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Posts::with("userRelation")->get()
+        $posts = Posts::with('author')->get()
             ->map(function($post){ 
-                $post->author_name = !is_null($post->userRelation) ? $post->userRelation->username : 'Chưa có người dùng';  
+                $post->author_name = !is_null($post->author) ? $post->author->username : 'Chưa có người dùng';  
                 return $post;
             });
 
         // $data = $data->load("userRelation");
-        $users = DB::table('users')->select('id', 'username')->get();
+        $users =User::select('id', 'username')->get();
         //    $data =  $this->postRepository->index();
 
         return view('admin/post/index', compact('posts','users'));
     }
     public function store(storePost $request)
-    {
+    {   
         $this->postRepository->store($request);
         return response()->json([
             'status' => '200',
@@ -48,41 +49,34 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $data = $this->postRepository->edit($id);
-        $comments = Comment::where('post_id',$id)->with('userRelation')->get();
-        // $comments =$comments->load('userRelation');
-        return view('admin/post/show', ['data' => $data,'comments'=>$comments]);
+        $news = $this->postRepository->edit($id);
+        $comments = Comment::where('post_id',$id)->with('post')->get();
+       
+        return view('admin/post/show', compact('news','comments'));
     }
 
 
     public function edit($id)
     {
-        $data = $this->postRepository->edit($id);
-        return response()->json([
-            'data' => $data,
-        ]);
+        $editPost = $this->postRepository->edit($id);
+        return response()->json(compact('editPost'));
     }
 
-    public function update($id, updatePost $request)
+    public function update( updatePost $request)
     {
-        $post = $this->postRepository->edit($id);
-        if (empty($post) == false) {
+        $post = $this->postRepository->edit($request['id']);
             $this->postRepository->update($post, $request);
             return response()->json([
                 'status' => '200',
                 'message' => 'Chỉnh sửa thành công',
             ]);
-        } else {
-            return response()->json([
-                'status' => '200',
-                'message' => 'Chỉnh sửa Thất bại',
-            ]);
-        }
+       
     }
     public function delete()
     {
         $id = request()->id;
         Posts::find($id)->delete();
+        Comment::where('post_id',$id)->delete();
         return response()->json([
 
             'status' => '100',

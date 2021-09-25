@@ -49,16 +49,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function postRelation(){
+    public function posts(){
         return $this->hasMany(Posts::class, 'userid_create' , 'id');
     }
-    public function commentsRelation(){
+    public function comment(){
         return $this->belongsTo(Comment::class, 'user_id' , 'id');
     }
-    // public function setPasswordAttribute($value){
-    //     // tên function bắt buộc phai đặt đung
-    //     $hased =bcrypt($value) ;
-    //    return $value = $this->attributes['password'] = $hased ;
+    public function setPasswordAttribute($value){
+        // tên function bắt buộc phai đặt đung
+        $hased =bcrypt($value) ;
+       return $value = $this->attributes['password'] = $hased ;
           
-    // }
+    }
 }

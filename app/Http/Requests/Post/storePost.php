@@ -27,7 +27,6 @@ class storePost extends FormRequest
             'title' =>'required|min:1',
             'content'=>'required|',
             'release_date' => 'required|date',
-            'userid_create' => 'required|',
             'image' => 'image',
         ];
     }

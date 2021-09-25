@@ -21,15 +21,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $c)
+            @foreach ($listComnent as $listComnent)
                 <tr>
-                    <th scope="row">{{ $c->id }}</th>
-                    <td>{{ $c->content }}</td>
-                    <td>{{ $c->user_id }}</td>
-                    <td>{{ $c->post_id }}</td>
+                    <th scope="row">{{ $listComnent->id }}</th>
+                    <td>{{ $listComnent->content }}</td>
+                    <td>{{ $listComnent->authors->username }}</td>
+                    <td></td>
                     <td>
                         <div>
-                            <button class="comment-delete_delete button btn btn-danger"  data-id="{{$c->id}}" >@lang('user.delete')</button>
+                            <button class="comment-delete button btn btn-danger"  data-id="{{$listComnent->id}}" >@lang('user.delete')</button>
                         </div>
                     </td>
                 </tr>
@@ -38,3 +38,6 @@
         </tbody>
     </table>
     @endsection
+    @push('script')
+    @include('admin.comment.commentJs')
+    @endpush

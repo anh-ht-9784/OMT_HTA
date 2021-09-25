@@ -21,8 +21,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $list = $this->userrepository->index();
-        return view('admin/users/index', ['data' => $list]);
+        $userlist = $this->userrepository->index();
+        return view('admin/users/index', compact('userlist'));
     }
 
 
@@ -37,34 +37,31 @@ class UserController extends Controller
     }
     public function edit($id)
     {
-        $data = $this->userrepository->edit($id);
-        return response()->json([
-            'data' => $data,
-        ]);
+        $editUser = $this->userrepository->edit($id);
+        return response()->json(
+            compact('editUser')
+        );
     }
 
 
-    public function update($id, UpdateUser $request)
+    public function update( UpdateUser $request)
     {
-        $user = $this->userrepository->edit($id);
-        if (empty($user) == true) {
-            return response()->json([
-                'status' => '100',
-                'message' => "Không có bản ghi nào tương ứng",
-            ]);
-        } else {
-            $data = request()->except("_token");
+            $user = $this->userrepository->edit($request['id']);
+            $data = request()->except("_token",'id');
             $this->userrepository->update($user, $data);
             return response()->json([
                 'status' => '200',
                 'message' => 'Cập nhật thành công',
             ]);
-        }
+        
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $this->userrepository->delete($id);
-        return redirect()->route('admin.users.index');
+        $this->userrepository->delete($request);
+       return response()->json([
+        'status' => '100',
+        'message' => 'Xóa thành công',
+       ]);
     }
 }

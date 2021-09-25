@@ -25,24 +25,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($posts as $c)
+            @foreach ($posts as $posts)
                 <tr>
-                    <th scope="row">{{ $c->id }}</th>
-                    <td>{{ $c->title }}</td>
+                    <th scope="row">{{ $posts->id }}</th>
+                    <td><a href="{{ route('admin.post.show',['id'=>$posts->id]) }}">{{ $posts->title }}</a></td>
                     <td>
-                        <image src="/image/product/{{ $c->image }}" with="800px" height="100px" width="100px    ">
+                        <image src="/image/product/{{ $posts->image }}" with="800px" height="100px" width="100px    ">
                     </td>
-                    <td>{{ $c->author_name}}</td>
+                    <td>{{ $posts->author_name}}</td>
                     <td>
-                        {{ $c->access == 0 ? 'Chưa phát hành' : 'Đã phát hành' }}
+                        {{ $posts->access == 0 ? 'Chưa phát hành' : 'Đã phát hành' }}
                     </td>
-                    <td>{{ $c->author_name }}</td>
+                    <td>{{ $posts->release_date }}</td>
 
                     <td>
-                        <button class="post-modal-edit btn btn-primary" role="button" data-id="{{ $c->id }}"
+                        <button class="post-modal-edit btn btn-primary" role="button" data-id="{{ $posts->id }}"
                             data-toggle="modal" data-target="#postEdit">@lang('user.edit')</button>
                         <div>
-                            <button class="post_delete button btn btn-danger"  data-id="{{$c->id}}" >@lang('user.delete')</button>
+                            <button class="post_delete button btn btn-danger"  data-id="{{$posts->id}}" >@lang('user.delete')</button>
                         </div>
                     </td>
                 </tr>
@@ -57,7 +57,7 @@
     </div>
     {{-- creatr --}}
     <div class="test-modal modal fade" name="postEdit" id="postEdit" tabindex="-1" role="dialog">
-        <div class="modal-dialog -xl" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             @include('admin.post.postForm')
         </div>
     </div>

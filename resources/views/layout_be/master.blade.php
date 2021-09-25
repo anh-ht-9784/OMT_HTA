@@ -10,6 +10,9 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     @include('layout_be.custom-css')
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="/ckeditor/ckfinder/ckfinder.js"></script>
 </head>
 
 @yield('css')
@@ -34,9 +37,9 @@
     <footer>
         @include('layout_be.footer')
     </footer>
- 
+
     @include('layout_be.custom-js')
-   
+
     @stack('script')
 </body>
 

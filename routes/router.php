@@ -15,27 +15,33 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::get('/', function () {
-    return view('admin/post/index');
-});
-Route::get('/', function () {
-    return view('admin/users/index');
-});
+    return view('frontend/index');
+})->name('frontend.index');
+Route::get('/login', function () {
+    return view('frontend/login');
+})->name('frontend.login');
 
+Route::get('/login', function () {
+    return view('frontend/login');
+})->name('frontend.login');
+
+Route::post('login', 'App\Http\Controllers\auth\LoginController@login')->name('auth.login');
+Route::get('logout', 'App\Http\Controllers\auth\LoginController@logout')->name('auth.logout');
 
 
 Route::group([
     'prefix' => 'admin',
-    'as' => 'admin.', 
+    'as' => 'admin.',
 ], function () {
     Route::group([
         'prefix' => 'users',
-        'as' => 'users.',     
+        'as' => 'users.',
     ], function () {
         Route::get('/', 'App\Http\Controllers\admin\UserController@index')->name('index');
         Route::post('store', 'App\Http\Controllers\admin\UserController@store')->name('store');
         Route::get('edit/{id}', 'App\Http\Controllers\admin\UserController@edit')->name('edit');
-        Route::post('update/{id}', 'App\Http\Controllers\admin\UserController@update')->name('update');
-        Route::post('delete/{id}', 'App\Http\Controllers\admin\UserController@delete')->name('delete');
+        Route::post('update', 'App\Http\Controllers\admin\UserController@update')->name('update');
+        Route::post('delete/', 'App\Http\Controllers\admin\UserController@delete')->name('delete');
     });
     Route::group([
         'prefix' => 'post',
@@ -45,7 +51,7 @@ Route::group([
         Route::post('store', 'App\Http\Controllers\admin\PostController@store')->name('store');
         Route::get('edit/{id}', 'App\Http\Controllers\admin\PostController@edit')->name('edit');
         Route::get('show/{id}', 'App\Http\Controllers\admin\PostController@show')->name('show');
-        Route::post('update/{id}', 'App\Http\Controllers\admin\PostController@update')->name('update');
+        Route::post('update', 'App\Http\Controllers\admin\PostController@update')->name('update');
         Route::post('delete', 'App\Http\Controllers\admin\PostController@delete')->name('delete');
     });
     Route::group([

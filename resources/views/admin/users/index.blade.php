@@ -25,7 +25,7 @@
     </div>
 @endsection
 @section('content')
-    <table class="table " id="myTable">
+    <table class="table " id="myTable"> 
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -39,27 +39,29 @@
                 <th scope="col">@lang('user.action ')</th>
 
             </tr>
-        </thead>
+        </thead> 
         <tbody>
-            @foreach ($data as $c)
+            @foreach ($userlist as $userlist)
                 <tr>
-                    <th scope="row">{{ $c->id }}</th>
-                    <td>{{ $c->username }}</td>
-                    <td>{{ $c->first_name }}</td>
-                    <td>{{ $c->middle_name }}</td>
-                    <td>{{ $c->last_name }}</td>
+                    <th scope="row">{{ $userlist->id }}</th>
+                    <td>{{ $userlist->username }}</td>
+                    <td>{{ $userlist->first_name }}</td>
+                    <td>{{ $userlist->middle_name }}</td>
+                    <td>{{ $userlist->last_name }}</td>
                     <td>
-                        <image src="/image/product/{{ $c->avatar }}" with="800px" height="100px" width="100px    ">
+                        <image src="/image/product/{{ $userlist->avatar }}" with="800px" height="100px" width="100px    ">
                     </td>
-                    <td>{{ $c->email }}</td>
+                    <td>{{ $userlist->email }}</td>
                     <td>
-                        {{ $c->gender == 1 ? 'nam' : 'nữ' }}
+                        {{ $userlist->gender == 1 ? 'nam' : 'nữ' }}
                     </td>
                     <td>
-                        <button class="btn-modal-edit btn btn-primary" onclick="myFunction()" onclick="userEdit({{ $c->iduser }})"
-                            role="button" data-id="{{ $c->id }}" data-toggle="modal"
+                        <button class="modal_user_edit btn btn-primary" 
+                            role="button" data-id="{{ $userlist->id }}" data-toggle="modal"
                             data-target="#modal_edit">@lang('user.edit')</button>
-                            @include('admin.users.user-form-delete')
+                            <div>
+                                <button class="user-delete button btn btn-danger"  data-id="{{$userlist->id}}" >@lang('user.delete')</button>
+                            </div>
 
                     </td>
                 </tr>

@@ -9,6 +9,7 @@
         <form method="POST" id="form_create"  action="" enctype="multipart/form-data">
             @csrf
             <div class="row">
+                <input class="mt-3 form-control" type="hidden" name="id_post" id="id_post" placeholder=""/>
             <div class="mt-3 col-md-6 col-sm-12">
                 <label>Tiêu đề</label>
                 <input class="mt-3 form-control" type="text" name="title" id="title" placeholder=""/>
@@ -25,7 +26,9 @@
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Nội Dung bài Viết</label>
-                <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+                <textarea name="content"  rows="10" cols="80">
+                    
+                </textarea>
                 <span class="text-danger" id="contentError"></span>
             </div>
             <div class="mb-3 col-md-6 col-sm-12" >
@@ -34,14 +37,6 @@
                 <input class="mt-3 form-control" type="date" name="release_date" id="release_date"  />
                 <span class="text-danger" id="release_dateError"></span>
 
-            </div>
-            <div class="mt-3 user_create col-md-6 col-sm-12">
-                <label>Người Đăng Bài</label>
-                <select class="form-select" id="userid_create" name="userid_create" aria-label="Default select example">                           
-                    @foreach ($users as $s)
-                        <option value="{{ $s->id }}">{{ $s->username }}</option>
-                    @endforeach
-                </select>
             </div>
         </div>
             <div class="mt-3">

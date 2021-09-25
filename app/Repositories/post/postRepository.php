@@ -4,6 +4,7 @@ namespace App\Repositories\post;
 
 use App\Models\Posts;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Post\storePost;
 use App\Repositories\users\UserRepositoryInterface;
 
@@ -18,7 +19,7 @@ class PostRepository
   public function index()
   {
     $data = Posts::all();
-    $data->load('userRelation');
+    $data->load('author');
     $users = DB::table('users')->select('id', 'username')->get();
 
      return[$data,$users];
@@ -38,6 +39,7 @@ class PostRepository
         $request['image'] = "nen_thom_01.jpg";
     }
     $request['access'] = "0";
+    $request['userid_create'] = Auth::id();
 
    return Posts::Create($request);
 

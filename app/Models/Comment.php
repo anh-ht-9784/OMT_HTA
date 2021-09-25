@@ -19,10 +19,10 @@ class Comment extends Model
         
     ];
 
-    public function userRelation(){
+    public function authors(){
         return $this->belongsTo(User::class, 'user_id' , 'id');
     }
-    public function postRelation(){
+    public function post(){
         return $this->belongsTo(Posts::class, 'post_id' , 'id');
     }
 }

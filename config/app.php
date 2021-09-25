@@ -177,7 +177,7 @@ return [
 
         // App\Providers\BackendServiceProvider::class,
 
-       
+        // Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
