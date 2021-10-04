@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -175,9 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // App\Providers\BackendServiceProvider::class,
-
-        // Barryvdh\Debugbar\ServiceProvider::class,
+        // sluggable
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+        // end sluggable
 
     ],
 

@@ -34,9 +34,9 @@ $config['authentication'] = function () {
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_licenseKey
 //Link get License keygen miễn phí: https://ganlvtech.github.io/ckfinder_keygen/ckfinder_keygen.html
 
-$config['licenseName'] = '';
-$config['licenseKey']  = '';
-
+$config['licenseName'] = 'omt.test';
+$config['licenseKey']  = '*V7W-*1**-M**4-*N**-*H**-X*U*-3**F';
+$config['debug'] = true;
 /*============================ CKFinder Internal Directory ============================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_privateDir
 
@@ -68,7 +68,7 @@ $config['images'] = array(
 $config['backends'][] = array(
     'name'         => 'default',
     'adapter'      => 'local',
-    'baseUrl'      => 'public/image/product', //Thư mục chứa file upload
+    'baseUrl'      => '/i-upload/editor/', //Thư mục chứa file upload
     //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
     'chmodFiles'   => 0777,
     'chmodFolders' => 0755,

@@ -27,7 +27,7 @@ class PostController extends Controller
     {
         $posts = Posts::with('author')->get()
             ->map(function($post){ 
-                $post->author_name = !is_null($post->author) ? $post->author->username : 'Chưa có người dùng';  
+                $post->author_name = !is_null($post->author) ? $post->author->username : 'Ẩn danh!';  
                 return $post;
             });
 
@@ -66,6 +66,8 @@ class PostController extends Controller
     {
         $post = $this->postRepository->edit($request['id']);
             $this->postRepository->update($post, $request);
+           
+           
             return response()->json([
                 'status' => '200',
                 'message' => 'Chỉnh sửa thành công',

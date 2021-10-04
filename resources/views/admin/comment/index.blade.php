@@ -4,7 +4,7 @@
 @endsection
 @section('body-title')
     <h1 class="font-weight-bold text-center" style="font-family: 'Times New Roman', Times, serif;">@lang('Danh Mục Bình Luận')</h1>
-    <button class="btn btn-success" id="comment-create" role="button" data-toggle="modal" data-target="#postCreat">Tao Moi</button>
+   
 @endsection
 
 @section('content')
@@ -23,10 +23,10 @@
         <tbody>
             @foreach ($listComnent as $listComnent)
                 <tr>
-                    <th scope="row">{{ $listComnent->id }}</th>
+                    <th scope="row">{{ $loop->index+1 }}</th>
                     <td>{{ $listComnent->content }}</td>
-                    <td>{{ $listComnent->authors->username }}</td>
-                    <td></td>
+                    <td>{{$listComnent->authors==null? "Tài Khoản " :$listComnent->authors->username}}</td>
+                    <td>{{ $listComnent->post->title}}</td>
                     <td>
                         <div>
                             <button class="comment-delete button btn btn-danger"  data-id="{{$listComnent->id}}" >@lang('user.delete')</button>

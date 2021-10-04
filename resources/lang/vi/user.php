@@ -2,23 +2,23 @@
 
 return [
    'create_user' => 'Tạo Mới Người Dùng',
-   'edit' => 'Cập Nhật',
+   'edit' => 'Sửa',
    'delete' => 'Xóa',
 
-   'first_name'  => " Họ",
-   'middle_name' => "Tên đệm",
-   'last_name' => "Tên ",
+   'first_name'=>'Họ',
+   'middle_name'=>'Tên Đệm',
+   'last_name'=>'Tên',
+   'password'=>' Mật Khẩu',
+   'account' =>'Tài Khoản',
+   'fullname' =>"Họ Và Tên",
+   'address' =>"Địa Chỉ",
    'avatar' => "Ảnh đại diện",
-   'email' => "Email",
-   'username' => "tên đăng nhập",
-   'gender' => "Giới Tính",
-   'action' => "hành động",
-
-   'title' => "Tiêu đề bài viết",
-   'image' => " Ảnh đại diện bài viết",
-   'access'=> "trạng thái",
-   'release_date'=>"Ngày phát hành",
-   'userid_create'=> 'Người tạo',
-
-   
+   'email' => "Tài Khoản Mail",
+   'username' => "Tên Đăng Nhập",
+   'gender' =>[
+      'title'=>'Giới Tính',
+      'male'=> "Nam",
+      'female'=>'nữ'
+   ],
+   'action' => "Hành Động",
 ];

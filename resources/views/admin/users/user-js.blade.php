@@ -10,6 +10,11 @@
 
         $("#btn-form-create").on('click', function(event) {
             event.preventDefault();
+            var dataRole = new Array();
+            $('#modal_create input[type=checkbox]:checked').each(function() {
+                dataRole.push($(this).val());
+            });
+            console.log(dataRole);
             dataform = new FormData();
             dataform.append('avatar', $("#modal_create input[name='avatar']")[0].files[0]);
             dataform.append('first_name', $("#modal_create input[name='first_name']").val());
@@ -21,6 +26,7 @@
             dataform.append('password', $("#modal_create input[name='password']").val());
             dataform.append('gender', $("#modal_create select[name='gender']").val());
             dataform.append('_token', $("#modal_create input[name='_token']").val());
+            dataform.append('role', dataRole);
             $.ajax({
                 type: "post",
                 url: "http://omt.test/admin/users/store",
@@ -50,8 +56,8 @@
             });
         });
     }
- 
-   
+
+
     $(".modal_user_edit").on('click', function(event) {
         var title_modal = document.getElementsByClassName("title-user-form");
         title_modal[1].innerHTML = "Cập Nhật Thông Tin Người Dùng";
@@ -68,19 +74,31 @@
             type: "get",
             url: url,
             success: function(response) {
-                console.log(response.editUser);
-                $("#modal_edit #id_user").val(response.editUser.id);
-                $("#modal_edit #first_name").val(response.editUser.first_name);
-                $("#modal_edit #middle_name").val(response.editUser.middle_name);
-                $("#modal_edit #last_name").val(response.editUser.last_name);
-                $("#modal_edit #email").val(response.editUser.email);
-                $("#modal_edit #username").val(response.editUser.username);
-                $("#modal_edit #gender").val(response.editUser.gender);
-                $("#modal_edit #address").val(response.editUser.address);
-                $("#modal_edit #gender").val(response.editUser.gender);
-                $("#modal_edit #avatar_old").val(response.editUser.avatar);
-                var img_url = "/image/product/" + response.editUser.avatar;
+                $("#modal_edit #id_user").val(response.getUser.id);
+                $("#modal_edit #first_name").val(response.getUser.first_name);
+                $("#modal_edit #middle_name").val(response.getUser.middle_name);
+                $("#modal_edit #last_name").val(response.getUser.last_name);
+                $("#modal_edit #email").val(response.getUser.email);
+                $("#modal_edit #username").val(response.getUser.username);
+                $("#modal_edit #gender").val(response.getUser.gender);
+                $("#modal_edit #address").val(response.getUser.address);
+                $("#modal_edit #gender").val(response.getUser.gender);
+                $("#modal_edit #avatar_old").val(response.getUser.avatar);
+                var img_url = "/image/product/" + response.getUser.avatar;
                 $("#modal_edit #image_old").attr("src", img_url);
+
+                response.getRole.forEach(element => {
+                    $('#modal_edit input[type=checkbox]').each(function() {  
+                      
+                           if(element.role_id == $(this).val()){
+                               $(this).attr("checked", "checked");
+                               
+                           }
+                    });
+
+                });
+
+                // $('#modal_create input[type=checkbox]').val() = response.getRole.;
             },
             error: function(data) {
 
@@ -90,8 +108,8 @@
         $("#btn-form-upload").on('click', function(event) {
             event.preventDefault();
             dataformupload = new FormData();
-            var url = "{{ route('admin.users.update') }}" ;
-      console.log(url);
+            var url = "{{ route('admin.users.update') }}";
+            console.log(url);
             if ($("#avatar")[0].files[0] == null) {
                 console.log("null");
                 dataformupload.append('avatar_old', $("#modal_edit input[name='avatar_old']").val());
@@ -99,7 +117,10 @@
                 console.log(" not null");
                 dataformupload.append('avatar', $("#modal_edit input[name='avatar']")[0].files[0]);
             }
-
+            var editRole = new Array();
+            $('#modal_edit input[type=checkbox]:checked').each(function() {
+                editRole.push($(this).val());
+            });
             dataformupload.append('id', $("#modal_edit input[name='id_user']").val());
             dataformupload.append('first_name', $("#modal_edit input[name='first_name']").val());
             dataformupload.append('middle_name', $("#modal_edit input[name='middle_name']").val());
@@ -109,6 +130,7 @@
             dataformupload.append('address', $("#modal_edit input[name='address']").val());
             dataformupload.append('gender', $("#modal_edit select[name='gender']").val());
             dataformupload.append('_token', $("#modal_edit input[name='_token']").val());
+            dataformupload.append('role', editRole);
 
             $.ajax({
                 type: "post",
@@ -132,7 +154,7 @@
                     if ($.isEmptyObject(errors) == false) {
                         $.each(errors.errors, function(key, value) {
                             var ErrorID = '#modal_edit #' + key + 'Error';
-                            $(span).text("");
+                            $('span').text("");
                             $(ErrorID).text(value);
                             //    console.log(key,value);
                         })
@@ -143,38 +165,38 @@
         });
     });
 
-     
+
     // delete
     $(".user-delete").on('click', function(event) {
-            event.preventDefault();
+        event.preventDefault();
+        @can('delete_user')
             var id = $(this).data('id');
             console.log(id);
             swal({
-                title: "Bạn chắc chắn muốn xóa",
-                buttons: [true, "Delete"],
+            title: "Bạn chắc chắn muốn xóa",
+            buttons: [true, "Delete"],
             }).then((willDelete) => {
-                if (willDelete) {
-
-                    $.ajax({
-                        type: "POST",
-                        headers: {
-                            'X-CSRF-Token': '{{ csrf_token() }}',
-                        },
-                        url: "{{ route('admin.users.delete') }}",
-                        data: {id:id},
-                        success: function(data) {
-                            if (data.status == 100) {
-                            alert(data.message);
-                            window.location.reload();
-                        }
-                        }
-                    });
-                } else {
-                    
-                }
+            if (willDelete) {
+        
+            $.ajax({
+            type: "POST",
+            headers: {
+            'X-CSRF-Token': '{{ csrf_token() }}',
+            },
+            url: "{{ route('admin.users.delete') }}",
+            data: {id:id},
+            success: function(data) {
+            if (data.status == 100) {
+            alert(data.message);
+            window.location.reload();
+            }
+            }
+            });
+            } else {
+        
+            }
             });;
-
-
-        });
-
+        
+        @endcan
+    });
 </script>

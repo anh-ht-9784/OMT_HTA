@@ -1,10 +1,10 @@
 <div class="row" style="padding: 0 10rem 0 10rem;">
     <div class="col-md-2">
-        <img src="image/logo/gamek.png" height="100rem">
+        <a href="{{ route('frontend.index') }}"><img src="{{ asset('image/logo/gamek.png') }}" height="100rem"></a>
     </div>
     <div class="col-md-10">
         <div class="top-header ">
-            <div style="padding-left: 40px;">@lang('KÊNH GAME SỐ 1 VIỆT NAM')</div>
+            <div style="padding-left: 40px;">@lang('layoutFe.header.title')</div>
             <div class="text-right" style="padding-right: 40px;">@lang('HOTLINE') : +085878083222</div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-light ">
@@ -17,36 +17,96 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="">@lang('GAME MOBILE') <span
+                        <a class="nav-link" href="">@lang('layoutfe.footer.gameMobile')<span
                                 class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">@lang('ESPORTS')</a>
+                        <a class="nav-link" href="">@lang('layoutfe.footer.esport')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">@lang('KHÁM PHÁ')</a>
+                        <a class="nav-link" href="">@lang('layoutfe.header.discover')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">@lang('TIN TỨC')</a>
+                        <a class="nav-link" href="">@lang('layoutfe.footer.news')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">@lang('CỘNG ĐỒNG')</a>
+                        <a class="nav-link" href="">@lang('layoutfe.header.community')</a>
                     </li>
                 </ul>
                 <div class="login-header">
                     <i class="fad fa-camera"></i>
+                    @if (Auth::check() == true)
 
-                    {{-- <a href="" class="text-decoration" style="padding-right: 5px;">@lang('Đăng Nhập')</a> --}}
-                    {{-- //login --}}
-                    @if (Auth::check() == false)
-                    <a href="{{ route('frontend.login') }}" class="login" >Login</a>  
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                                    <strong>@lang('layoutfe.header.account')</strong>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="navbar-login">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <p class="text-center">
+                                                        <img src="/image/product/{{ Auth::user()->avatar }}"
+                                                            width="80" height="80" alt="nice"
+                                                            class="rounded-circle mr-3">
+                                                    </p>
+
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <p class="text-left">
+                                                        <strong>{{ auth::user()->username }}</strong>
+                                                    </p>
+                                                    <p class="text-left small">{{ auth::user()->email }}</p>
+                                                    <p class="text-left">
+                                                        <a class="btn btn-primary btn-block btn-sm"
+                                                            href="{{ route('auth.editAccount') }}"
+                                                            class="login">@lang('layoutfe.header.editAccount')</a>
+                                                        @can('creator')
+                                                            @can('create_user')
+                                                                <a class="btn btn-primary btn-block btn-sm"
+                                                                    href="{{ route('admin.users.index') }}"
+                                                                    class="login">@lang('layoutfe.header.admin')</a>
+
+                                                            @else
+                                                                <a class="btn btn-primary btn-block btn-sm"
+                                                                    href="{{ route('admin.post.index') }}"
+                                                                    class="login">@lang('layoutfe.header.admin')</a>
+                                                            @endcan
+                                                        @endcan
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="navbar-login navbar-login-session">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p>
+                                                        <a href="{{ route('auth.logout') }}"
+                                                            class="btn btn-danger btn-block">@lang('layoutfe.header.logout')</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     @else
-                    <a href="{{ route('auth.logout') }}" class="login" >Logout</a> 
-                    {{-- {{var_dump(Auth::user()->email)}}  --}}
+                        <a href="{{ route('frontend.login') }}"
+                            class="login">@lang('layoutfe.header.login')</a>
                     @endif
-                   
-                 {{-- end --}}
+
+                    {{-- end --}}
                 </div>
+
             </div>
     </div>
     </nav>

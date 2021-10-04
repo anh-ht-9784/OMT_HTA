@@ -5,7 +5,7 @@ namespace App\Repositories\post;
 use App\Models\Posts;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Post\storePost;
-use App\Repositories\users\UserRepositoryInterface;
+
 
 class PostRepository 
 {

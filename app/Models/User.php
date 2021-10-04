@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -49,16 +51,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts(){
-        return $this->hasMany(Posts::class, 'userid_create' , 'id');
+    public function posts()
+    {
+        return $this->hasMany(Posts::class, 'userid_create', 'id');
     }
-    public function comment(){
-        return $this->belongsTo(Comment::class, 'user_id' , 'id');
+    public function role_users()
+    {
+        return $this->hasMany(Role_user::class, 'user_id', 'id');
     }
-    public function setPasswordAttribute($value){
+
+    public function Roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
+    }
+
+    public function comment()
+    {
+        return $this->belongsTo(Comment::class, 'user_id', 'id');
+    }
+    public function setPasswordAttribute($value)
+    {
         // tên function bắt buộc phai đặt đung
-        $hased =bcrypt($value) ;
-       return $value = $this->attributes['password'] = $hased ;
-          
+        $hased = bcrypt($value);
+        return $value = $this->attributes['password'] = $hased;
     }
+
+  
 }

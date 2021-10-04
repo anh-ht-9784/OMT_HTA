@@ -2,38 +2,44 @@
 
 namespace App\Http\Controllers\auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\AccountRepository;
+use App\Http\Requests\frontend\createAccount;
+use App\Http\Requests\frontend\updateAccount;
 
 class LoginController extends Controller
 {
-    public function login(Request $request){
-        $data_login = [
-            'username' => $request['username'],
-            'password' => $request['password'],
-        ];
-    
-        // // Dump data
-        // dd($credentials);
-        
-        $result = Auth::attempt($data_login);
-        
-        if ($result == false) {
-            return response()->json([
-                'status' => '200',
-                'message' => 'Đăng Nhập Không thanh công',
-            ]);
-        }else{
-            $user = Auth::user();
-            return redirect()->route('frontend.index');
-        }
-        
-      
-    }
-    public function logout(){
-        Auth::logout();
-        return redirect()->route('frontend.index');
 
+    public $account;
+
+    public function __construct(AccountRepository $account)
+    {
+        $this->account = $account;
+    }
+    public function login(Request $request)
+    { 
+      return  $this->account->login($request);  
+    }
+    public function logout()
+    {
+      return $this->account->logout();
+
+    }
+    public function register(createAccount $request)
+    {
+        return  $this->account->register($request); 
+    }
+    public function editAccount()
+    {
+     $dataAcount =  $this->account->editAccount();
+       return view('frontend/editAcount', compact('dataAcount'));
+    }
+
+    public function uploadAccount(updateAccount $request)
+    {
+    return $this->account->uploadAccount();
     }
 }

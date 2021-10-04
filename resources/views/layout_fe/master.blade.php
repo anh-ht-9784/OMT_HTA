@@ -23,7 +23,7 @@
       
     </header>
     <div class="image-banner container" >
-    <img  src="image/banner4.jpg" width="100%" height="">
+    <img  src="{{ asset('image/banner4.jpg') }}" width="100%" height="">
     </div>
     <article class="container">
         @yield('content')
@@ -33,16 +33,16 @@
         <div class="container">
             <div class="row">
                 <div class="group-logo col-md-3 col-sm-12">
-                    <img src="image/logo/baccarat-logo.jpg" width="100%" alt="" srcset="">
+                    <img src="{{ asset('image/logo/baccarat-logo.jpg') }}" width="100%" alt="" srcset="">
                 </div>
                 <div class="group-logo col-md-3 col-sm-12">
-                    <img src="image/logo/baccarat-logo.jpg" width="100%" alt="" srcset="">
+                    <img src="{{ asset('image/logo/baccarat-logo.jpg') }}" width="100%" alt="" srcset="">
                 </div>
                 <div class="group-logo col-md-3 col-sm-12">
-                    <img src="image/logo/baccarat-logo.jpg" width="100%" alt="" srcset="">
+                    <img src="{{ asset('image/logo/baccarat-logo.jpg') }}" width="100%" alt="" srcset="">
                 </div>
                 <div class="group-logo col-md-3 col-sm-12">
-                    <img src="image/logo/baccarat-logo.jpg" width="100%" alt="" srcset="">
+                    <img src="{{ asset('image/logo/baccarat-logo.jpg') }}" width="100%" alt="" srcset="">
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
     </footer>
     <div class="footer-tt">
         <p class="container">
-            @lang('   Chính Sách | Quy Chế Hoạt Động | Điều Khoản và Điều Kiện | Chủ Sở Hữu')
+            @lang('layoutFe.footer.title')
         </p>
     </div>
 

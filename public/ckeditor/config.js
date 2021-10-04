@@ -4,10 +4,12 @@
  * Tích hợp và hướng dẫn bởi https://trungtrinh.com - Website chia sẻ bách khoa toàn thư */
 
 CKEDITOR.editorConfig = function(config) {
-    config.filebrowserBrowseUrl = './ckeditor/ckfinder/ckfinder.html';
-    config.filebrowserImageBrowseUrl = './ckeditor/ckfinder/ckfinder.html?type=Images';
-    config.filebrowserFlashBrowseUrl = './ckeditor/ckfinder/ckfinder.html?type=Flash';
-    config.filebrowserUploadUrl = './ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
-    config.filebrowserImageUploadUrl = './ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
-    config.filebrowserFlashUploadUrl = './ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
+    config.allowedContent = true;
+    alert('Hello!');
+    // config.filebrowserBrowseUrl = asset('ckfinder/ckfinder.html');
+    // config.filebrowserImageBrowseUrl = asset('ckfinder/ckfinder.html?type=Images');
+    // config.filebrowserFlashBrowseUrl = asset('ckfinder/ckfinder.html?type=Flash');
+    // config.filebrowserUploadUrl = asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files');
+    // config.filebrowserImageUploadUrl = asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images');
+    // config.filebrowserFlashUploadUrl = asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash');
 };

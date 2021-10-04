@@ -1,4 +1,4 @@
-
+{{-- 
   <button class="btn btn-danger" data-toggle="modal"
   data-target="#confim_delete{{ $c->id }}">@lang('user.delete')</button>
 <div class="modal fade" id="confim_delete{{ $c->id }}" tabindex="-1" role="dialog">
@@ -25,4 +25,14 @@
         </div>
     </div>
 </div>
-</div>
+</div> --}}
+{{-- @can('edit_user ')
+<button class="modal_user_edit btn btn-primary" 
+    role="button" data-id="{{ $userlist->id }}" data-toggle="modal"
+    data-target="#modal_edit">@lang('user.edit')</button>
+    @endcan
+    <div>
+        @can('delete_user')
+        <button class="user-delete button btn btn-danger"  data-id="{{$userlist->id}}" >@lang('user.delete')</button>
+        @endcan
+    </div> --}}

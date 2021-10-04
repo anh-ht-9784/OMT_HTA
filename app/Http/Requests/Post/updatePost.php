@@ -30,6 +30,13 @@ class updatePost extends FormRequest
            
         ];
     }
+    public function attributes(){
+        return [  
+            'title' =>'Tiêu đề bài viết',
+            'content'=>'Nội dung bài viết',
+            'release_date' => 'Ngày đăng',
+      ];
+      }
     public function messages()
     {
         return [

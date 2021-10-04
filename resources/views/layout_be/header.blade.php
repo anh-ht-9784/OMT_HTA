@@ -1,8 +1,8 @@
-    <nav class="navbar navbar-light bg-dark row ">
+    {{-- <nav class="navbar navbar-light bg-dark row ">
        
         <div class="container-fluid col-2">
-          <a class="navbar-brand image-header " href="#">
-            <img src="image/logo/gamek.png" width="100px" class="d-inline-block align-text-top">
+          <a class="navbar-brand image-header " href="{{ route('frontend.index') }}">
+            <img src="/image/logo/gamek.png" width="100px" class="d-inline-block align-text-top">
            
           </a>
         </div>   
@@ -16,4 +16,4 @@
             </form>
           </div>
         
-      </nav>
+      </nav> --}}

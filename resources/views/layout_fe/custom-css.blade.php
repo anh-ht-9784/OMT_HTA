@@ -49,12 +49,9 @@ nav a {
     font-size: 13px;
     color: gray !important;
 }
-
 .navbar-nav :hover .nav-link {
     color: white !important;
 }
-
-
 /* header */
 
 
@@ -65,33 +62,51 @@ footer,
     background-color: black !important;
     color: white;
 }
-
 .list-group-item a {
     vertical-align: middle;
 }
-
 .foot-icon {
     display: block;
     padding-left: 15px;
 }
-
 .footer-tt {
     border-top: 1px solid white;
     background-color: black;
     color: white;
     height: 50px;
 }
-
 .footer-tt>p {
     padding-top: 1rem;
     text-align: center;
 }
-
 .card-body,
 body,
 article {
     background-color: #F0F0F0;
 }
+.navbar-login
+{   background-color: #F0F0F0;
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+.dropdown{
+    margin:0 2rem 0 0 !important;
+}
+.dropdown-menu{
+    background-color: #F0F0F0; 
+    
+}
+.navbar-login-session
+{
+    background-color: #F0F0F0;
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
 
-
+.icon-size
+{
+    font-size: 87px;
+}
 </style>

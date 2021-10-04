@@ -1,11 +1,16 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        var editor =  CKEDITOR.replace('content');
-        // CKFinder.setupCKEditor( editor );
-        
-
         $("#post-create").on('click', function(event) {
-
+            CKEDITOR.replace("content", {
+                removePlugins: "exportpdf",
+                height : '40rem',
+                filebrowserBrowseUrl: '{{ asset('ckeditor/ckfinder/ckfinder.html') }}',
+                filebrowserImageBrowseUrl: '{{ asset('ckeditor/ckfinder/ckfinder.html?type=Images') }}',
+                filebrowserFlashBrowseUrl: '{{ asset('ckeditor/ckfinder/ckfinder.html?type=Flash') }}',
+                filebrowserUploadUrl: '{{ asset('ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+                filebrowserImageUploadUrl: '{{ asset('ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+                filebrowserFlashUploadUrl: '{{ asset('ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+            });
             var title_modal = document.getElementsByClassName("title-post-form");
             title_modal[0].innerHTML = "Thêm mới bài viết.";
             $("form .btn-form-create")[0].id = "post-form-create";
@@ -14,7 +19,7 @@
 
             $("#post-form-create").on('click', function(event) {
                 event.preventDefault();
-                $("#postCreat span .text-danger").text("");
+                $("#form_create .text-danger").text("");
                 console.log(CKEDITOR.instances.content.getData());
                 PostCreate = new FormData();
                 PostCreate.append('image', $("#form_create input[name='image']")[0].files[0]);
@@ -44,6 +49,7 @@
                     },
                     error: function(data) {
                         var errors = data.responseJSON;
+
                         if ($.isEmptyObject(errors) == false) {
                             $.each(errors.errors, function(key, value) {
                                 var ErrorID = '#postCreat #' + key +
@@ -102,6 +108,16 @@
 
 
         $(".post-modal-edit").on('click', function(event) {
+            contents = document.getElementsByName('content')[1];
+            CKEDITOR.replace(contents, {
+                height : '40rem',
+                filebrowserBrowseUrl: '{{ asset('ckeditor/ckfinder/ckfinder.html') }}',
+                filebrowserImageBrowseUrl: '{{ asset('ckeditor/ckfinder/ckfinder.html?type=Images') }}',
+                filebrowserFlashBrowseUrl: '{{ asset('ckeditor/ckfinder/ckfinder.html?type=Flash') }}',
+                filebrowserUploadUrl: '{{ asset('ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+                filebrowserImageUploadUrl: '{{ asset('ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+                filebrowserFlashUploadUrl: '{{ asset('ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+            });
             var title_modal = document.getElementsByClassName("title-post-form");
             title_modal[1].innerHTML = "Cập Nhật Bài Viết";
             $("form .btn-form-create")[1].id = "post-form-upload";
@@ -115,7 +131,7 @@
                     console.log(response.editPost);
                     $("#postEdit #id_post").val(response.editPost.id);
                     $("#postEdit #title").val(response.editPost.title);
-                    $("#postEdit textarea").val(response.editPost.content);
+                    CKEDITOR.instances.content.setData(response.editPost.content);
                     var img_url = "/image/product/" + response.editPost.image;
                     $("#postEdit #image_old").attr("src", img_url);
                     $("#postEdit #avatar_old").val(response.editPost.image);
@@ -135,10 +151,8 @@
                 }
                 postUpload.append('id', $("#postEdit input[name='id_post']").val());
                 postUpload.append('title', $("#postEdit input[name='title']").val());
-                postUpload.append('content', $("#postEdit textarea[name='content']").val());
-                postUpload.append('release_date', $("#postEdit input[name='release_date']")
-                    .val());
-
+                postUpload.append('content', CKEDITOR.instances.content.getData());
+                postUpload.append('release_date', $("#postEdit input[name='release_date']").val());
                 postUpload.append('_token', $("#postEdit input[name='_token']").val());
                 $.ajax({
                     type: "post",
@@ -157,9 +171,10 @@
                     },
                     error: function(data) {
                         var errors = data.responseJSON;
+                        var ErrorID = '#postEdit #' + key + 'Error';
                         if ($.isEmptyObject(errors) == false) {
                             $.each(errors.errors, function(key, value) {
-                                var ErrorID = '#postEdit #' + key + 'Error';
+
                                 $(ErrorID).text(value);
                                 console.log(ErrorID);
                             })

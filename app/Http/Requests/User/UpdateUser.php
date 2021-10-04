@@ -35,6 +35,19 @@ class UpdateUser extends FormRequest
           
         ];
     }
+    public function attributes(){
+        return [  
+              'username'=> 'Tên Đăng Nhập',
+              'password' => 'Mật Khẩu',
+              'first_name'=>'Họ',
+              'middle_name' => 'Tên đệm',
+              'last_name' => 'Tên',
+              'avatar' => 'Ảnh Đại Diện',
+              'email' => 'Tài Khoản Mail',
+              'address' => 'Địa Chỉ',
+               
+      ];
+      }
     public function messages()
     {
         return [

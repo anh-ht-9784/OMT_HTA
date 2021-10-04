@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
+        "ckeditor": "^4.12.1",
         "ckeditor4": "^4.16.2"
     }
 }

@@ -30,6 +30,15 @@ class storePost extends FormRequest
             'image' => 'image',
         ];
     }
+    public function attributes(){
+        return [  
+            'title' =>'Tiêu đề bài viết',
+            'content'=>'Nội dung bài viết',
+            'release_date' => 'Ngày đăng',
+            'image' => 'Ảnh bìa bài viết',
+               
+      ];
+      }
     public function messages()
     {
         return [

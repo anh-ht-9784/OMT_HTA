@@ -14,13 +14,17 @@ Trang Chủ
       border: none !important;
       padding: 50px 10px 0px;
       background-color: #F0F0F0;
-      text-align: center;
+    
       margin: 0 auto;
   }
 
   .qc-right {
       padding-top: 50px ;
       
+  }
+  a{
+    text-decoration: none !important ;
+    color:black;
   }
   .news-top{
       margin-top:2rem;
@@ -31,6 +35,7 @@ Trang Chủ
   .news-top>p{    
       line-height:50px;
   }
+  
 </style>
 @endsection
 
@@ -41,38 +46,16 @@ Trang Chủ
 <div class="row">
     <div class="col-8">
         <div class="row">
+          @foreach ($HomeList as $HomeList)
         <div class="card col-md-6">
-            <img src="image/card1.jpg" class="card-img-top" alt="...">
+            <img src="/image/product/{{ $HomeList->image }}" class="card-img-top" alt="...">
             <div class="card-body">
 
-                <p class="card-text">Gạ kèo solo mid, hỏi địa chỉ nhà và những hành động thường thấy của các game thủ Việt thời còn "trẻ trâu"</p>
+                <p class="card-text"><a href="{{ route('frontend.news', ['id' => $HomeList->id,'slug' => $HomeList->slug]) }}"><b>{{ $HomeList->title }}</b></a></p>
 
             </div>
         </div>
-        <div class="card col-md-6">
-            <img src="image/card1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-
-                <p class="card-text">Gạ kèo solo mid, hỏi địa chỉ nhà và những hành động thường thấy của các game thủ Việt thời còn "trẻ trâu"</p>
-
-            </div>
-        </div>
-        <div class="card col-md-6">
-            <img src="image/card1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-
-                <p class="card-text">Gạ kèo solo mid, hỏi địa chỉ nhà và những hành động thường thấy của các game thủ Việt thời còn "trẻ trâu"</p>
-
-            </div>
-        </div>
-        <div class="card col-md-6">
-            <img src="image/card1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-
-                <p class="card-text">Gạ kèo solo mid, hỏi địa chỉ nhà và những hành động thường thấy của các game thủ Việt thời còn "trẻ trâu".</p>
-
-            </div>
-        </div>
+        @endforeach
     </div>
     </div>
     <div class="col-4 qc-right">
@@ -86,66 +69,26 @@ Trang Chủ
     <div class="col-12 news-top" >
        <p>@lang('Mới Cập Nhật')</p>
     </div>
+    @foreach ($news as $new )
     <div class="card mb-3" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="image/news1.png" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">5 lần Hollywood "lừa" người xem quá cao tay bằng kỹ xảo: Người thật cũng có thể bị thay thế, nhìn sự thật phía sau mà ngã ngửa!</h5>
-              <p class="card-text">Những bộ phim này sử dụng kỹ xảo vô cùng tinh tế, khiến khán giả khó có thể nhận ra nếu không xem hậu trường.</p>
-              <p class="card-text"><small class="text-muted">SIXTEENTEN - Manga/Film 16/09/2021 09:00</small></p>
-            </div>
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="/image/product/{{ $new->image }}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><a href="{{ route('frontend.news', ['id' => $new->id,'slug' => $new->slug]) }}">{{ $new->title }}</a></h5>
+            <p class="card-text">Những bộ phim này sử dụng kỹ xảo vô cùng tinh tế, khiến khán giả khó có thể nhận ra nếu không xem hậu trường.</p>
+            <p class="card-text"><small class="text-muted">SIXTEENTEN - Manga/Film {{ $new->release_date }}</small></p>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="card mb-3" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="image/news1.png" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">5 lần Hollywood "lừa" người xem quá cao tay bằng kỹ xảo: Người thật cũng có thể bị thay thế, nhìn sự thật phía sau mà ngã ngửa!</h5>
-              <p class="card-text">Những bộ phim này sử dụng kỹ xảo vô cùng tinh tế, khiến khán giả khó có thể nhận ra nếu không xem hậu trường.</p>
-              <p class="card-text"><small class="text-muted">SIXTEENTEN - Manga/Film 16/09/2021 09:00</small></p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card mb-3" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="image/news1.png" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">5 lần Hollywood "lừa" người xem quá cao tay bằng kỹ xảo: Người thật cũng có thể bị thay thế, nhìn sự thật phía sau mà ngã ngửa!</h5>
-              <p class="card-text">Những bộ phim này sử dụng kỹ xảo vô cùng tinh tế, khiến khán giả khó có thể nhận ra nếu không xem hậu trường.</p>
-              <p class="card-text"><small class="text-muted">SIXTEENTEN - Manga/Film 16/09/2021 09:00</small></p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card mb-3" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="image/news1.png" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">5 lần Hollywood "lừa" người xem quá cao tay bằng kỹ xảo: Người thật cũng có thể bị thay thế, nhìn sự thật phía sau mà ngã ngửa!</h5>
-              <p class="card-text">Những bộ phim này sử dụng kỹ xảo vô cùng tinh tế, khiến khán giả khó có thể nhận ra nếu không xem hậu trường.</p>
-              <p class="card-text"><small class="text-muted">SIXTEENTEN - Manga/Film 16/09/2021 09:00</small></p>
-            </div>
-          </div>
-        </div>
-      </div>
-</div>
+   
+</div> 
+    @endforeach
+   
 
 @endsection
 

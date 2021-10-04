@@ -4,8 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\User\StoreUser;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\User\UpdateUser;
 use App\Repositories\users\userrepository;
 
@@ -21,8 +24,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $userlist = $this->userrepository->index();
-        return view('admin/users/index', compact('userlist'));
+            $userlist = $this->userrepository->index();
+            return view('admin/users/index', compact('userlist'));
     }
 
 
@@ -30,6 +33,7 @@ class UserController extends Controller
     {
         $data = request()->except("_token");
         $result = $this->userrepository->store($data);
+       
         return response()->json([
             'status' => '200',
             'message' => 'Thêm mới thành công',
@@ -37,15 +41,16 @@ class UserController extends Controller
     }
     public function edit($id)
     {
-        $editUser = $this->userrepository->edit($id);
+        $getUser = $this->userrepository->edit($id);
+        $getRole = DB::table('role_users')->select('role_id')->where('user_id',$id)->get();
         return response()->json(
-            compact('editUser')
+            compact('getUser','getRole')
         );
     }
 
 
     public function update( UpdateUser $request)
-    {
+    {       
             $user = $this->userrepository->edit($request['id']);
             $data = request()->except("_token",'id');
             $this->userrepository->update($user, $data);
