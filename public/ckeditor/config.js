@@ -4,8 +4,7 @@
  * Tích hợp và hướng dẫn bởi https://trungtrinh.com - Website chia sẻ bách khoa toàn thư */
 
 CKEDITOR.editorConfig = function(config) {
-    config.allowedContent = true;
-    alert('Hello!');
+
     // config.filebrowserBrowseUrl = asset('ckfinder/ckfinder.html');
     // config.filebrowserImageBrowseUrl = asset('ckfinder/ckfinder.html?type=Images');
     // config.filebrowserFlashBrowseUrl = asset('ckfinder/ckfinder.html?type=Flash');

@@ -169,7 +169,7 @@
     // delete
     $(".user-delete").on('click', function(event) {
         event.preventDefault();
-        @can('delete_user')
+      
             var id = $(this).data('id');
             console.log(id);
             swal({
@@ -197,6 +197,6 @@
             }
             });;
         
-        @endcan
+       
     });
 </script>

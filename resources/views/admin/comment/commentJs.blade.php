@@ -1,6 +1,6 @@
 <script>
 // Delete Comment
-$(".comment-delete").on('click', function(event) {
+$("body").on("click", ".comment-delete", function(event) {
             event.preventDefault();
             var id = $(this).data('id');
             swal({

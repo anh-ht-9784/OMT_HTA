@@ -22,16 +22,15 @@
                 <th scope="col">@lang('post.access')</th>
                 <th scope="col">@lang('post.release_date')</th>
                 <th scope="col"></th>
-
             </tr>
         </thead>
         <tbody class="text-center">
             @foreach ($posts as $posts)
                 <tr>
                     <th scope="row"> {{ $loop->index+1 }} </th>
-                    <td><a href="{{ route('admin.post.show', ['id' => $posts->id,'slug' => $posts->slug]) }}">{{ $posts->title }}</a></td>
+                    <td><a href="{{ route('admin.post.show', ['id' => $posts->id]) }}">{{ $posts->title }}</a></td>
                     <td>
-                        <image src="/image/product/{{ $posts->image }}" with="800px" height="100px" width="100px    ">
+                        <image src="/image/product/{{ $posts->image }}" with="800px" height="100px" width="100px">
                     </td>
                     <td>{{ $posts->author_name }}</td>
                     <td>
@@ -48,11 +47,11 @@
                         </div>
                     </td>
                 </tr>
-
             @endforeach
         </tbody>
     </table>
     <div class="test-modal modal fade" name="postCreat" id="postCreat" role="dialog">
+        
         <div class="modal-dialog modal-xl" role="document">
             @include('admin.post.postForm')
         </div>

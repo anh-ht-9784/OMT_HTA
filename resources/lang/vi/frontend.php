@@ -1,5 +1,37 @@
 <?php
 return [
+    'title'=>'  Sửa Thông tin tài Khoản',
     'username'=> ' Tên Đăng Nhập',
     'password'=> 'Mật Khẩu',
+    'first_name'=>'Họ',
+   'middle_name'=>'Tên Đệm',
+   'last_name'=>'Tên',
+   'password'=>' Mật Khẩu',
+   'account' =>'Tài Khoản',
+   'fullname' =>"Họ Và Tên",
+   'address' =>"Địa Chỉ",
+   'avatar' => "Ảnh đại diện",
+   'email' => "Tài Khoản Mail",
+   'username' => "Tên Đăng Nhập",
+   'gender' =>[
+      'title'=>'Giới Tính',
+      'male'=> "Nam",
+      'female'=>'nữ'
+   ],
+   'views'=>'Luợt Xem',
+   'cancel' => 'hủy',
+   'save' => 'Lưu',
+   'login'=>' Đăng Nhập',
+   'resetPass'=>"Đổi Mật Khẩu",
+   'old_pass'=>'Mật Khẩu Cũ',
+   'new_pass'=>'Mật Khẩu Mới',
+   'text'=>'Bạn chưa có tài khoản',
+   'create_account'=>'Tạo Tài Khoản',
+   'account'=> 'Tài Khoản',
+   'comment'=>'Bình Luận',
+   'post'=>'Những bộ phim này sử dụng kỹ xảo vô cùng tinh tế, khiến khán giả khó có thể nhận ra nếu không xem hậu trường.',
+   'category'=>'SIXTEENTEN - Manga / Film',
+   'index-title'=>"Danh Sách bài Viết",
+   'next' => "Trang Sau",
+   'previous'=>'Trang Trước'
 ];

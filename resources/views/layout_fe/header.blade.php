@@ -29,9 +29,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="">@lang('layoutfe.footer.news')</a>
                     </li>
+                    @if (Auth::check() == true)
                     <li class="nav-item">
-                        <a class="nav-link" href="">@lang('layoutfe.header.community')</a>
+                        <a class="nav-link" href="{{ route('auth.editAccount') }}">@lang('layoutfe.header.me')</a>
                     </li>
+                    @endif
                 </ul>
                 <div class="login-header">
                     <i class="fad fa-camera"></i>
@@ -55,7 +57,6 @@
                                                             width="80" height="80" alt="nice"
                                                             class="rounded-circle mr-3">
                                                     </p>
-
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <p class="text-left">
@@ -63,21 +64,18 @@
                                                     </p>
                                                     <p class="text-left small">{{ auth::user()->email }}</p>
                                                     <p class="text-left">
+                                                        @can('show_post')
                                                         <a class="btn btn-primary btn-block btn-sm"
-                                                            href="{{ route('auth.editAccount') }}"
-                                                            class="login">@lang('layoutfe.header.editAccount')</a>
-                                                        @can('creator')
-                                                            @can('create_user')
-                                                                <a class="btn btn-primary btn-block btn-sm"
-                                                                    href="{{ route('admin.users.index') }}"
-                                                                    class="login">@lang('layoutfe.header.admin')</a>
-
-                                                            @else
-                                                                <a class="btn btn-primary btn-block btn-sm"
-                                                                    href="{{ route('admin.post.index') }}"
-                                                                    class="login">@lang('layoutfe.header.admin')</a>
-                                                            @endcan
-                                                        @endcan
+                                                            href="{{ route('admin.post.index') }}"
+                                                            class="login">@lang('layoutfe.header.admin')
+                                                        </a>
+                                                    @endcan
+                                                        <a class="btn btn-primary btn-block btn-sm"
+                                                        href="{{ route('resetPassword') }}"
+                                                        class="login">
+                                                        @lang('frontend.resetPass')
+                                                    </a>
+                                                     
                                                     </p>
                                                 </div>
                                             </div>
@@ -111,3 +109,9 @@
     </div>
     </nav>
 </div>
+
+
+<!-- Button trigger modal -->
+
+  
+ 

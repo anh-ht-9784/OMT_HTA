@@ -10,7 +10,13 @@
 
     <h1 class="font-weight-bold text-center" style="font-family: 'Times New Roman', Times, serif;">{{ $news->title }}</h1>
     <div class="container">
-        <p>{{ print($news->content) }}</p>
+        <p>{{ print
+        
+        
+        
+        
+        
+        ($news->content) }}</p>
     </div>
     <div class="container">
         <form class="row g-3">

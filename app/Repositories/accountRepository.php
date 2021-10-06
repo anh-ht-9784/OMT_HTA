@@ -26,20 +26,17 @@ class AccountRepository
             ]);
         }
     }
-
     public function logout()
     {
         Auth::logout();
         return redirect()->route('frontend.index');
     }
-
-    public function register(){
-        $data = request()->except("_token");
-        
+    public function register($request){
+        $data = $request->except("_token");
         if (empty($data['avatar']) == false) {
             $image = request()->file('avatar');
             $image_name = $image->getClientOriginalName();
-
+  
             request()->file('avatar')->move(public_path('image/product'), $image_name);
             $data['avatar'] = $image_name;
           } else {
@@ -51,17 +48,48 @@ class AccountRepository
              return response()->json([
                 'status' => '200',
                 'message' => 'Tạo tài Khoản Thành công.',
-            ]);
+            ]);  
     }
 
     public function editAccount(){    
       return   User::find(Auth::id());
     }
 
-    public function uploadAccount(){
-        $data = request()->except("_token");
+    public function uploadAccount($request){
+        $data = $request->except("_token");
         $user = User::find($data['id_user']);
+        if (empty($data['avatar']) == false) {
+          $image = request()->file('avatar');
+          $image_name = $image->getClientOriginalName();
+          request()->file('avatar')->move(public_path('image/product'), $image_name);
+          $data['avatar'] = $image_name;
+        }
+        
         $user->update($data);
-        return redirect()->route('frontend.index');
+        return redirect()->route('frontend.index');  
+    }
+    public function uploadPassword($request){
+        $data_login = [
+            'username' => Auth::user()->username,
+            'password' => $request['password'],
+          ];
+          $update = [
+            'password' => $request['newpass'],
+          ];
+          $result = Auth::attempt($data_login);
+      
+          if ($result == true) {
+            $user = User::find(Auth::id())->update($update);
+            Auth::logout();
+            return response()->json([
+              'status' => '200',
+              'message' => 'Đổi Mật Khẩu Thành Công. Xin Đăng Nhập Lại',
+          ]);
+          } else {
+            return response()->json([
+              'status' => '100',
+              'message' => 'Mật khẩu cũ sai.',
+          ]);
+          }
     }
 }

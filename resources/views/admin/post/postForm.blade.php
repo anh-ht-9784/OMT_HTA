@@ -3,6 +3,7 @@
         <h5 class="title-post-form modal-title" id="exampleModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
+            
         </button>
     </div>
     <div class="modal-body">
@@ -33,7 +34,7 @@
             <div class="mb-3 col-md-6 col-sm-12" >
 
                 <label>@lang('post.release_date')</label>
-                <input class="mt-3 form-control" type="date" name="release_date" id="release_date"  />
+                <input class="release_date mt-3 form-control" type="date"   name="release_date" id="release_date"  />
                 <span class="text-danger" id="release_dateError"></span>
 
             </div>
@@ -45,3 +46,4 @@
         </form>
     </div>
 </div>
+s

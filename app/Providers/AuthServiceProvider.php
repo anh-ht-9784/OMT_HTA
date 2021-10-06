@@ -37,24 +37,25 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->registerPolicies();
         $permissions = $this->getPermissions();
-        $roles = $this->getRole();
-        
+        // $roles = $this->getRole();
+         
+
 
         foreach ($permissions as $permission) {
             gate::define($permission->name, function ($user) use ($permission) {
+                
                 $permissionIdsOfUser = $this->getPermissionIdsOfUser($user);
+              
                 return in_array($permission->id, $permissionIdsOfUser);
             });
         }
 
-        foreach ($roles as $role) {
-            gate::define($role->name, function ($user) use ($role) {
-                $roleIds = $this->getRolesOfUser($user);
-                return in_array($role->id, $roleIds);
-            });
-        }
-
-
+        // foreach ($roles as $role) {
+        //     gate::define($role->name, function ($user) use ($role) {
+        //         $roleIds = $this->getRolesOfUser($user);
+        //         return in_array($role->id, $roleIds);
+        //     });
+        // }
     }
     // check permissions
     
@@ -84,34 +85,6 @@ class AuthServiceProvider extends ServiceProvider
         }
         return $permission;
     }
-
-   //check role
-    
-   private function getRole()
-    {
-        $role = Cache::get('roleCache');
-       
-        if (is_null($role)) {
-            $role =  Role::all();
-            Cache::put('roleCache',  $role, $seconds = 6000);
-        }
-        return $role;
-    }
-    private function getRolesOfUser($user)
-    {
-        $cacheRoleUser = Cache::get("roleOfUser$user->id");
-        
-        if (is_null($cacheRoleUser)) {
-            $roleIds = collect(DB::table('role_users')->where('user_id', $user->id)->get())->pluck('role_id')->toArray();
-            Cache::put("roleOfUser$user->id",  $roleIds,  $seconds = 3000);
-            return $roleIds;
-        } else {
-
-            return  $cacheRoleUser;
-        }
-    }
-
-    
 }
 
 

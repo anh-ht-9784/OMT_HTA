@@ -22,5 +22,7 @@ return [
         'logout'=>'Đăng Xuất',
         'login'=>'Đăng Nhập',
         'admin' =>'Trang Quản trị',
+        'editpass' =>'Đổi Mật Khẩu',
+        'me'=>'Cá Nhân',
     ],
 ];

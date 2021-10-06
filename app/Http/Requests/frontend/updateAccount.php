@@ -24,14 +24,12 @@ class updateAccount extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|max:15',
             'first_name'=>'required|',
             'middle_name' => 'required',
             'last_name' => 'required|',
             'avatar' => 'image',
             'email' => 'required|email',
             'address' => 'required|',
-            'gender' => 'required|',
         ];
     }
     public function attributes(){
@@ -43,9 +41,7 @@ class updateAccount extends FormRequest
               'last_name' => 'Tên',
               'avatar' => 'Ảnh Đại Diện',
               'email' => 'Tài Khoản Mail',
-              'address' => 'Địa Chỉ',
-             
-        
+              'address' => 'Địa Chỉ', 
       ];
       }
     public function messages()

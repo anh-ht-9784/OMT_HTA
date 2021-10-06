@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -21,6 +22,8 @@ class Posts extends Model
         'release_date',
         'image',
         'userid_create',
+        'views',
+        'slug',
         
     ];
     public function sluggable()
@@ -31,6 +34,13 @@ class Posts extends Model
             ]
         ];
     }
+
+    public function incrementReadCount() {
+        
+        $this->views++;
+        return $this->save();
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

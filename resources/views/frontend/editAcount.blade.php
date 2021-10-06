@@ -1,6 +1,6 @@
 @extends('layout_fe.master')
 @section('title')
-  Sửa Thông tin tài Khoản
+@lang('frontend.title')
 @endsection
 
 @section('header')
@@ -12,14 +12,14 @@
     @csrf
     <input type="hidden" name="id_user" id="id_user" value="{{ $dataAcount->id}}">
     <div class="mt-3">
-        <label>Họ</label>
+        <label>@lang('frontend.first_name')</label>
         <input class="mt-3 form-control" type="text" id="first_name" name="first_name" value="{{ $dataAcount->first_name }}"/>
         @error('first_name')
         <span class="text-danger">{{ $message }}</span>
        @enderror
     </div>
     <div class="mt-3">
-        <label>Tên đệm</label>
+        <label>@lang('frontend.middle_name')</label>
         <input class="mt-3 form-control" type="text" name="middle_name" id="middle_name" value="{{ $dataAcount->middle_name }}" />
         @error('middle_name')
         <span class="text-danger">{{ $message }}</span>
@@ -27,7 +27,7 @@
     </div>
     
     <div class="mt-3">
-        <label>Tên</label>
+        <label>@lang('frontend.last_name')</label>
         <input class="mt-3 form-control" type="text" name="last_name" id="last_name" value="{{ $dataAcount->last_name }}" />
         @error('last_name')
         <span class="text-danger">{{ $message }}</span>
@@ -35,27 +35,27 @@
     </div>
     <div class="row">
     <div class="col-6 mt-3">
-        <label>Ảnh đại diện</label>
+        <label>@lang('frontend.avatar')</label>
         <input class="mt-3 form-control" type="file" name="avatar" id="avatar" /><br>
-        @error('first_name')
+        @error('avatar')
         <span class="text-danger">{{ $message }}</span>
        @enderror
         <image src="/image/product/{{ $dataAcount->avatar }}" with="1800px" height="500px">
     </div>
     <div class="col-6 mt-3">
-        <label>Giới Tính</label>
+        <label>@lang('frontend.gender.title')</label>
         <select class="mt-3 form-control" name="gender" id="gender" >
             <option value="1" {{ $dataAcount->gender==1? "selected":"" }}>
-                Nam
+                @lang('frontend.gender.male')
             </option>
             <option value="2"  {{ $dataAcount->gender==2? "selected":"" }}>
-                Nữ
+                @lang('frontend.gender.female')
             </option>
         </select>
     </div>
 </div>
     <div class="mt-3">
-        <label>Email</label>
+        <label>@lang('frontend.email')</label>
         <input class="mt-3 form-control" type="email" name="email" id="email" value="{{ $dataAcount->email }}" value="{{ $dataAcount->email}}" />
         @error('email')
         <span class="text-danger">{{ $message }}</span>
@@ -63,7 +63,7 @@
     </div>
 
     <div class="mt-3">
-        <label>Địa CHỉ</label>
+        <label>@lang('frontend.address')</label>
         <input class="mt-3 form-control" type="text" name="address" id="address"  value="{{ $dataAcount->address }}" />
         @error('address')
         <span class="text-danger">{{ $message }}</span>
@@ -73,8 +73,8 @@
   
 
     <div class="mt-3">
-        <button type="submit"  class="mt-3 btn btn-primary">Save</button>
-        <button type="reset" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit"  class="mt-3 btn btn-primary">@lang('frontend.save')</button>
+        <button type="reset" class="btn btn-default" data-dismiss="modal">@lang('frontend.cancel')</button>
     </div>
 </form>
 </div>

@@ -24,7 +24,7 @@ Trang Chủ
   }
   a{
     text-decoration: none !important ;
-    color:black;
+    color:black !important;
   }
   .news-top{
       margin-top:2rem;
@@ -51,35 +51,38 @@ Trang Chủ
             <img src="/image/product/{{ $HomeList->image }}" class="card-img-top" alt="...">
             <div class="card-body">
 
-                <p class="card-text"><a href="{{ route('frontend.news', ['id' => $HomeList->id,'slug' => $HomeList->slug]) }}"><b>{{ $HomeList->title }}</b></a></p>
+                <p class="card-text"><a href="{{ route('frontend.news', ['slug' => $HomeList->slug]) }}"><b>{{ $HomeList->title }}</b></a></p>
 
             </div>
         </div>
         @endforeach
-    </div>
+    </div> 
     </div>
     <div class="col-4 qc-right">
         <div class="qc-right-img">
             <img src="image/qc.jpg" width="100%" class="" alt="...">
             <img style="padding-top:3.2rem" src="image/qc.jpg" width="100%" class="" alt="...">
         </div>
-    </div>
+    </div> 
 </div>
 <div class="row news">
     <div class="col-12 news-top" >
-       <p>@lang('Mới Cập Nhật')</p>
+       <p>@lang('frontend.index-title')</p>
     </div>
     @foreach ($news as $new )
     <div class="card mb-3" >
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="/image/product/{{ $new->image }}" class="img-fluid rounded-start" alt="...">
+          <img src="/image/product/{{ $new->image }}" class="img-fluid rounded-start">
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title"><a href="{{ route('frontend.news', ['id' => $new->id,'slug' => $new->slug]) }}">{{ $new->title }}</a></h5>
-            <p class="card-text">Những bộ phim này sử dụng kỹ xảo vô cùng tinh tế, khiến khán giả khó có thể nhận ra nếu không xem hậu trường.</p>
-            <p class="card-text"><small class="text-muted">SIXTEENTEN - Manga/Film {{ $new->release_date }}</small></p>
+            <h5 class="card-title"><a href="{{ route('frontend.news', ['slug' => $new->slug]) }}">{{ $new->title }}</a></h5>
+            <p class="card-text">@lang('frontend.post')</p>
+            <p class="card-text"><small class="text-muted">@lang('frontend.category') {{ date('d-m-Y', strtotime($new->release_date))}}</small>
+             <small class="text-muted"> / @lang('frontend.comment') :<b>{{ $new->comment->count() }}</b> / @lang('frontend.views') : <b>{{ $new->views }}</b></small>
+            </p>
+            
           </div>
         </div>
       </div>
@@ -88,8 +91,8 @@ Trang Chủ
    
 </div> 
     @endforeach
-   
-
+    {{ $news->render('frontend.paginator') }}
+    {{-- {{ $news->links() }} --}}
 @endsection
 
 @section('js')
